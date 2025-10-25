@@ -1,0 +1,450 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SHAIK RABBANI Portfolio</title>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Orbitron', sans-serif;
+        }
+
+        body {
+            background: #0a0a0a;
+            color: #e0e0e0;
+            overflow-x: hidden;
+        }
+
+        /* Header with Glitch Effect */
+        header {
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            background: linear-gradient(45deg, #ff00ff, #00ffff, #ff0000, #00ff00);
+            background-size: 400%;
+            animation: gradientShift 10s ease infinite;
+            text-align: center;
+            position: relative;
+        }
+
+        header h1 {
+            font-size: 6rem;
+            text-transform: uppercase;
+            animation: glitch 1s linear infinite;
+            position: relative;
+        }
+
+        header h1::before,
+        header h1::after {
+            content: 'SHAIK RABBANI';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+
+        header h1::before {
+            color: #ff00ff;
+            animation: glitch-top 1s linear infinite;
+            clip-path: polygon(0 0, 100% 0, 100% 33%, 0 33%);
+            -webkit-clip-path: polygon(0 0, 100% 0, 100% 33%, 0 33%);
+        }
+
+        header h1::after {
+            color: #00ffff;
+            animation: glitch-bottom 1.5s linear infinite;
+            clip-path: polygon(0 67%, 100% 67%, 100% 100%, 0 100%);
+            -webkit-clip-path: polygon(0 67%, 100% 67%, 100% 100%, 0 100%);
+        }
+
+        header p {
+            font-size: 1.8rem;
+            margin-top: 20px;
+            color: #fff;
+            text-shadow: 0 0 15px #00ffff;
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 1000;
+        }
+
+        nav a {
+            color: #00ffff;
+            text-decoration: none;
+            margin: 0 20px;
+            font-size: 1.3rem;
+            transition: all 0.3s;
+        }
+
+        nav a:hover {
+            color: #ff00ff;
+            text-shadow: 0 0 15px #ff00ff;
+        }
+
+        /* Sections */
+        section {
+            padding: 120px 20px;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            background: #1a1a1a;
+            border-top: 2px solid #00ffff;
+        }
+
+        section h2 {
+            font-size: 3.5rem;
+            color: #ff00ff;
+            text-shadow: 0 0 20px #ff00ff;
+            margin-bottom: 60px;
+        }
+
+        /* Projects */
+        .project-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 30px;
+            width: 100%;
+            max-width: 1400px;
+        }
+
+        .project-card {
+            background: #2a2a2a;
+            padding: 25px;
+            border-radius: 15px;
+            transition: transform 0.3s, box-shadow 0.3s;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .project-card:hover {
+            transform: translateY(-15px);
+            box-shadow: 0 0 30px #00ffff;
+        }
+
+        .project-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, transparent, #ff00ff);
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+
+        .project-card:hover::before {
+            opacity: 0.3;
+        }
+
+        .project-card h3 {
+            color: #00ffff;
+            font-size: 2rem;
+            margin-bottom: 15px;
+        }
+
+        .project-card p {
+            font-size: 1.1rem;
+            color: #e0e0e0;
+            margin-bottom: 20px;
+        }
+
+        .project-card a {
+            color: #ff00ff;
+            text-decoration: none;
+            font-size: 1rem;
+            transition: color 0.3s;
+        }
+
+        .project-card a:hover {
+            color: #00ffff;
+        }
+
+        /* Skills */
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            width: 100%;
+            max-width: 1400px;
+        }
+
+        .skill-card {
+            background: #2a2a2a;
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+            transition: transform 0.3s;
+        }
+
+        .skill-card:hover {
+            transform: scale(1.1);
+            box-shadow: 0 0 20px #ff00ff;
+        }
+
+        .skill-card h3 {
+            color: #00ffff;
+            font-size: 1.5rem;
+            margin-bottom: 10px;
+        }
+
+        /* Testimonials */
+        .testimonial-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            width: 100%;
+            max-width: 1400px;
+        }
+
+        .testimonial-card {
+            background: #2a2a2a;
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+            box-shadow: 0 0 10px #00ffff;
+        }
+
+        .testimonial-card p {
+            font-size: 1.1rem;
+            color: #e0e0e0;
+            margin-bottom: 15px;
+        }
+
+        .testimonial-card h4 {
+            color: #ff00ff;
+            font-size: 1.3rem;
+        }
+
+        /* Contact Form */
+        #contact form {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            width: 100%;
+            max-width: 600px;
+        }
+
+        #contact input,
+        #contact textarea {
+            padding: 15px;
+            background: #2a2a2a;
+            border: 2px solid #00ffff;
+            color: #e0e0e0;
+            font-size: 1.1rem;
+            border-radius: 5px;
+            transition: border-color 0.3s;
+        }
+
+        #contact input:focus,
+        #contact textarea:focus {
+            border-color: #ff00ff;
+            outline: none;
+        }
+
+        #contact button {
+            padding: 15px;
+            background: #ff00ff;
+            border: none;
+            color: #fff;
+            font-size: 1.3rem;
+            cursor: pointer;
+            border-radius: 5px;
+            transition: background 0.3s;
+        }
+
+        #contact button:hover {
+            background: #00ffff;
+            color: #000;
+        }
+
+        /* Animations */
+        @keyframes gradientShift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        @keyframes glitch {
+            2%, 64% { transform: translate(2px, 0) skew(0deg); }
+            4%, 60% { transform: translate(-2px, 0) skew(0deg); }
+            62% { transform: translate(0, 0) skew(5deg); }
+        }
+
+        @keyframes glitch-top {
+            2%, 64% { transform: translate(2px, -2px); }
+            4%, 60% { transform: translate(-2px, 2px); }
+            62% { transform: translate(13px, -1px) skew(-13deg); }
+        }
+
+        @keyframes glitch-bottom {
+            2%, 64% { transform: translate(-2px, 0); }
+            4%, 60% { transform: translate(-2px, 0); }
+            62% { transform: translate(-22px, 5px) skew(21deg); }
+        }
+
+        /* Particles Background */
+        #particles-js {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            z-index: -1;
+        }
+    </style>
+</head>
+<body>
+    <div id="particles-js"></div>
+    <nav>
+        <a href="#home">Home</a>
+        <a href="#projects">Projects</a>
+        <a href="#skills">Skills</a>
+        <a href="#about">About</a>
+        <a href="#testimonials">Testimonials</a>
+        <a href="#contact">Contact</a>
+    </nav>
+
+    <header id="home">
+        <h1>SHAIK RABBANI</h1>
+        <p>Creative Visionary | Innovator | Crafting Unforgettable Digital Experiences</p>
+    </header>
+
+    <section id="projects">
+        <h2>My Projects</h2>
+        <div class="project-grid">
+            <div class="project-card">
+                <h3>Neon City App</h3>
+                <p>A futuristic web application with immersive animations and real-time interactivity, blending art and technology for a unique user experience.</p>
+                <a href="#">View Project</a>
+            </div>
+            <div class="project-card">
+                <h3>CyberArt Gallery</h3>
+                <p>An online gallery showcasing digital art with a cyberpunk aesthetic, featuring 3D animations and interactive controls.</p>
+                <a href="#">View Project</a>
+            </div>
+            <div class="project-card">
+                <h3>Data Visualizer</h3>
+                <p>A dynamic data visualization tool that transforms complex datasets into stunning, interactive visual experiences.</p>
+                <a href="#">View Project</a>
+            </div>
+            <div class="project-card">
+                <h3>Virtual Reality Demo</h3>
+                <p>A proof-of-concept VR experience that pushes the boundaries of immersive storytelling with bold visuals.</p>
+                <a href="#">View Project</a>
+            </div>
+            <div class="project-card">
+                <h3>AI-Powered Dashboard</h3>
+                <p>An intelligent dashboard integrating AI to provide real-time insights with a sleek, futuristic interface.</p>
+                <a href="#">View Project</a>
+            </div>
+        </div>
+    </section>
+
+    <section id="skills">
+        <h2>My Skills</h2>
+        <div class="skills-grid">
+            <div class="skill-card">
+                <h3>Web Development</h3>
+                <p>HTML, CSS, JavaScript, React, Node.js</p>
+            </div>
+            <div class="skill-card">
+                <h3>UI/UX Design</h3>
+                <p>Figma, Adobe XD, User-Centered Design</p>
+            </div>
+            <div class="skill-card">
+                <h3>Animation</h3>
+                <p>CSS Animations, WebGL, Three.js</p>
+            </div>
+            <div class="skill-card">
+                <h3>Backend Development</h3>
+                <p>Express.js, MongoDB, APIs</p>
+            </div>
+            <div class="skill-card">
+                <h3>Creative Coding</h3>
+                <p>p5.js, Processing, Generative Art</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="about">
+        <h2>About SHAIK RABBANI</h2>
+        <p>I'm SHAIK RABBANI, a passionate creator at the intersection of technology, design, and art. With a knack for crafting bold, innovative digital experiences, I specialize in building visually stunning and highly interactive web applications. My mission is to shock and inspire through creativity, pushing the boundaries of what's possible in the digital realm. Whether it's coding a dynamic website, designing immersive UI, or exploring generative art, I bring energy and vision to every project.</p>
+        <p>Based in [Your Location], I thrive on challenges and am always exploring new technologies to elevate my craft. Let's create something extraordinary together!</p>
+    </section>
+
+    <section id="testimonials">
+        <h2>What People Say</h2>
+        <div class="testimonial-grid">
+            <div class="testimonial-card">
+                <p>"SHAIK RABBANI's work is nothing short of electrifying. The creativity and technical skill are unmatched!"</p>
+                <h4>Jane Doe, Creative Director</h4>
+            </div>
+            <div class="testimonial-card">
+                <p>"Working with SHAIK was a game-changer. The portfolio's design blew our expectations away!"</p>
+                <h4>John Smith, Tech Lead</h4>
+            </div>
+            <div class="testimonial-card">
+                <p>"A true visionary! SHAIK's projects are bold, innovative, and leave a lasting impression."</p>
+                <h4>Emily Chen, UI Designer</h4>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact">
+        <h2>Contact Me</h2>
+        <form>
+            <input type="text" placeholder="Name" required>
+            <input type="email" placeholder="Email" required>
+            <textarea placeholder="Your Message" rows="6" required></textarea>
+            <button type="submit">Send Message</button>
+        </form>
+    </section>
+
+    <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
+    <script>
+        particlesJS('particles-js', {
+            particles: {
+                number: { value: 120, density: { enable: true, value_area: 800 } },
+                color: { value: ['#ff00ff', '#00ffff', '#ff0000', '#00ff00'] },
+                shape: { type: 'circle' },
+                opacity: { value: 0.6, random: true },
+                size: { value: 4, random: true },
+                move: { enable: true, speed: 3, direction: 'none', random: true }
+            },
+            interactivity: {
+                detect_on: 'canvas',
+                events: { onhover: { enable: true, mode: 'repulse' }, onclick: { enable: true, mode: 'push' } },
+                modes: { repulse: { distance: 120 }, push: { particles_nb: 5 } }
+            }
+        });
+
+        // Smooth scrolling for navigation
+        document.querySelectorAll('nav a').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                const section = document.querySelector(this.getAttribute('href'));
+                section.scrollIntoView({ behavior: 'smooth' });
+            });
+        });
+
+        // Form submission (placeholder for demo)
+        document.querySelector('form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            alert('Message sent! (This is a demo. Add backend for full functionality.)');
+        });
+    </script>
+</body>
+</html>
